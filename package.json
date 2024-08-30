@@ -1,0 +1,29 @@
+{
+  "name": "raksha-shetty-brainflix-api",
+  "version": "1.0.0",
+  "description": "Api for brainflix website",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"node --watch server.js",
+    "start":"node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rakshajay/Raksha-shetty-brainflix-api.git"
+  },
+  "author": "Raksha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rakshajay/Raksha-shetty-brainflix-api/issues"
+  },
+  "homepage": "https://github.com/rakshajay/Raksha-shetty-brainflix-api#readme",
+  "dependencies": {
+    "axios": "^1.7.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "uuid": "^10.0.0"
+  }
+}
