@@ -69,12 +69,12 @@ router.post("/videos", (req, res) => {
         id: uuidv4(),
         title: req.body.title,
         channel: "Aiden Thompson",
-        image: "default.jpeg",
+        image: "image0.jpg",
         description: req.body.description,
         views: "125,6723",
         likes: "45,678",
         duration: "2:04",
-        video: "default.mp4",
+        video: "BrainStation Sample Video.mp4",
         timestamp:Date.now(),
         comments: [],
     };
@@ -120,50 +120,31 @@ router.post("/videos/:id/comments", (req, res) => {
 });
 
 
-// router.get("/videos/:videoId/comments/:commentId", (req, res) => {
-//     try {
-//         const videos = JSON.parse(fs.readFileSync("./data/video.json"));
+router.delete("/videos/:videoId/comments/:commentId", (req, res) => {
+    try {
+        const videos = JSON.parse(fs.readFileSync("./data/video.json", "utf8"));
 
-//         const foundVideo = videos.find((video) => video.id === req.params.id);
+        const video = videos.find((video) => video.id === req.params.videoId);
 
-//         if (foundVideo) {
-//             res.send(foundVideo.comments);
-//         } else {
-//             res.status(404).send({ message: "Video not found" });
-//         }
-//     } catch (error) {
-//         console.error("Error reading or parsing video data:", error);
-//         res.status(500).send({ message: "Internal Server Error" });
-//     }
-// });
+        if (!video) {
+            return res.status(404).send({ message: "Video not found" });
+        }
+        const videoCommentIndex = video.comments.findIndex((comment) => comment.id === req.params.commentId);
 
+        if (videoCommentIndex === -1) {
+            return res.status(404).send({ message: "Comment not found" });
+        }
+        const deletedComment = video.comments[videoCommentIndex];
 
-// Uncomment and update the following routes if needed
+        video.comments.splice(videoCommentIndex, 1);
 
-// router.get("/movies", (req, res) => {
-//     const movies = JSON.parse(fs.readFileSync("./data/movies.json"));
-//     res.send(movies);
-// });
+        fs.writeFileSync("./data/video.json", JSON.stringify(videos, null, 2));
 
-// router.get("/movies/:id", (req, res) => {
-//     const movies = JSON.parse(fs.readFileSync("./data/movies.json"));
-//     const foundMovie = movies.find((movie) => movie.id === req.params.id);
-//     res.send(foundMovie);
-// });
-
-// router.post("/movies", (req, res) => {
-//     const moviesData = JSON.parse(fs.readFileSync("./data/movies.json", "utf8"));
-//     const newMovie = {
-//         id: uuidv4(),
-//         title: req.body.title,
-//         genre: req.body.genre,
-//         image: "default.jpeg",
-//         reviews: [],
-//     };
-
-//     moviesData.push(newMovie);
-//     fs.writeFileSync("./data/movies.json", JSON.stringify(moviesData));
-//     res.send(newMovie);
-// });
+        res.status(200).send(deletedComment);
+    } catch (error) {
+        console.error("Error deleting video comment:", error);
+        res.status(500).send({ message: "Internal Server Error" });
+    }
+});
 
 export default router;
