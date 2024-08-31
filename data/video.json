@@ -54,13 +54,6 @@
         "timestamp": 1690348662000
       },
       {
-        "id": "bf704c76-cba9-462e-ac0a-166315df756c",
-        "name": "Taylor Nkoshi",
-        "comment": "Your videos are a true escape for the soul. Watching this feels like taking a scenic stroll through the charming streets of Europe. Thank you for bringing the magic of travel to our screens!",
-        "likes": 0,
-        "timestamp": 1690262262000
-      },
-      {
         "id": "ec2bec8d-ea2b-458e-9d93-b7f929a8659b",
         "name": "Adnan Al-Farsi",
         "comment": "I appreciate the attention to detail and the way you immerse us in the local culture. Each video is an invitation to dream and plan our own adventures. Keep inspiring us with your incredible travel diaries!",
@@ -136,6 +129,12 @@
         "comment": "The serene scenes are lovely, but I'm skeptical about its real-world applicability. Maybe some concrete examples of how it's worked for you and others would add more credibility. Open to seeing more evidence-based content.",
         "likes": 1,
         "timestamp": 1676269062000
+      },
+      {
+        "id": "11c31504-cf16-4183-9143-99b8808fff7b",
+        "name": "No name",
+        "comment": "qq",
+        "timestamp": 1725143867508
       }
     ]
   },
