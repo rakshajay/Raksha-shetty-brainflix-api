@@ -81,7 +81,7 @@ router.post("/videos",upload.single('file'), (req, res) => {
         id: uuidv4(),
         title: req.body.title,
         channel: "Aiden Thompson",
-        image: req.file.originalname,
+        image: req.file? req.file.originalname : "image0.jpg",
         description: req.body.description,
         views: "125,6723",
         likes: "45,678",
@@ -166,4 +166,4 @@ router.delete("/videos/:videoId/comments/:commentId", (req, res) => {
 //     res.json(req.file.originalname)
 // })
 
-// export default router;
+export default router;
