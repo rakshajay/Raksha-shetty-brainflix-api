@@ -1,6 +1,9 @@
 import express from "express";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
+import multer from 'multer';
+
+const upload = multer({ dest: 'public/' })
 
 const router = express.Router();
 
@@ -57,7 +60,7 @@ router.get("/videos/:id/comments", (req, res) => {
 });
 
 
-router.post("/videos", (req, res) => {
+router.post("/videos",upload.single('file'), (req, res) => {
     try {
     const videoData = JSON.parse(
         fs.readFileSync("./data/video.json", "utf8")
@@ -69,7 +72,7 @@ router.post("/videos", (req, res) => {
         id: uuidv4(),
         title: req.body.title,
         channel: "Aiden Thompson",
-        image: "image0.jpg",
+        image: req.file.originalname,
         description: req.body.description,
         views: "125,6723",
         likes: "45,678",
@@ -146,5 +149,12 @@ router.delete("/videos/:videoId/comments/:commentId", (req, res) => {
         res.status(500).send({ message: "Internal Server Error" });
     }
 });
+
+//trying to upload image with multer
+
+router.post("/upload", upload.single('file'),(req,res) =>{
+    console.log(req.file)
+    res.json(req.file.originalname)
+})
 
 export default router;
