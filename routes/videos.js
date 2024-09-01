@@ -3,7 +3,16 @@ import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 import multer from 'multer';
 
-const upload = multer({ dest: 'public/' })
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  });
+  
+  const upload = multer({ storage })
 
 const router = express.Router();
 
@@ -152,9 +161,9 @@ router.delete("/videos/:videoId/comments/:commentId", (req, res) => {
 
 //trying to upload image with multer
 
-router.post("/upload", upload.single('file'),(req,res) =>{
-    console.log(req.file)
-    res.json(req.file.originalname)
-})
+// router.post("/upload", upload.single('file'),(req,res) =>{
+//     console.log(req.file)
+//     res.json(req.file.originalname)
+// })
 
-export default router;
+// export default router;
